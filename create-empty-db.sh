@@ -4,7 +4,7 @@ docker stop neo4j-empty
 
 PASSWORD=admin
 CWD=`pwd`
-NEO4J=neo4j:3.5-enterprise
+NEO4J=neo4j:4.2-enterprise
 
 docker run -d --name neo4j-empty \
     --rm \

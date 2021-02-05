@@ -26,6 +26,7 @@ public class SuspectRunnable implements Runnable {
         try (Transaction tx = db.beginTx()) {
             Set<Node> suspects = new HashSet<>();
             for (Node node : td.createdNodes()) {
+                node = tx.getNodeById(node.getId());
                 if (node.hasLabel(Labels.Suspect)) {
                     suspects.add(node);
                     //GmailSender.sendEmail("maxdemarzi@gmail.com", "A new Suspect has been created in the System!", "boo-yeah");
@@ -41,8 +42,10 @@ public class SuspectRunnable implements Runnable {
             }
 
             for (Relationship relationship : td.createdRelationships()) {
+                relationship = tx.getRelationshipById(relationship.getId());
                 if (relationship.isType(RelationshipTypes.KNOWS)) {
                     for (Node user : relationship.getNodes()) {
+                        user = tx.getNodeById(user.getId());
                         if (user.hasLabel(Labels.Suspect)) {
                             log.info("A new direct relationship to a Suspect has been created!");
                         }
@@ -56,6 +59,8 @@ public class SuspectRunnable implements Runnable {
                     }
                 }
             }
+        } catch (Exception $ex) {
+            log.info($ex.getMessage());
         }
     }
 }
