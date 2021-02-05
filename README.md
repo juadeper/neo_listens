@@ -3,12 +3,13 @@ Neo_Listens
 
 Sample Event Listener / Triggers
 
+Updated project to be compatible with the new major version of Neo4j 4
 
 1. Build it:
 
         mvn clean package
 
-2. Copy target/triggers-1.0.jar to the plugins/ directory of your Neo4j server.
+2. Copy target/triggers-2.0.jar to the plugins/ directory of your Neo4j server.
 
 3. Start your Neo4j Server
 
